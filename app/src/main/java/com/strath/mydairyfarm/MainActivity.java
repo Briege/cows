@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DashboardFragment dashboardFragment = new DashboardFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.add(dashboardFragment, DashboardFragment.class.getSimpleName());
-        fragmentTransaction.add(R.id.fragment_holder, dashboardFragment);
-
-        fragmentTransaction.commit();
+//        DashboardFragment dashboardFragment = new DashboardFragment();
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+////        fragmentTransaction.add(dashboardFragment, DashboardFragment.class.getSimpleName());
+//        fragmentTransaction.add(R.id.fragment_holder, dashboardFragment);
+//
+//        fragmentTransaction.commit();
 
         mAuth = FirebaseAuth.getInstance();
     }
