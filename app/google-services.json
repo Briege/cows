@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1025666088262",
+    "firebase_url": "https://mydairyfarm-6fc69.firebaseio.com",
+    "project_id": "mydairyfarm-6fc69",
+    "storage_bucket": "mydairyfarm-6fc69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025666088262:android:381c5465b01c94b8",
+        "android_client_info": {
+          "package_name": "com.strath.mydairyfarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025666088262-3mfbldf1f79fav7si7vnmtbpks9r7ucu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.strath.mydairyfarm",
+            "certificate_hash": "cf6d65a661f0f29446409c9f3782e90dd4d302fc"
+          }
+        },
+        {
+          "client_id": "1025666088262-k9faoiu0sqg5l497rqlgohc6tb5fg8f7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqnIJmAS7T4F3TeuzIyJHBSlGa1spThUE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025666088262-k9faoiu0sqg5l497rqlgohc6tb5fg8f7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
