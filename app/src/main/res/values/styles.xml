@@ -14,8 +14,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
-    <style name="TextComponent"/>
+    <style name="TextComponent" />
 
     <style name="TextComponent.ItemRow">
         <item name="android:gravity">center_vertical</item>
@@ -34,7 +33,8 @@
         <item name="android:paddingRight">8dp</item>
     </style>
 
-    <style name="TextAppearance" parent="TextAppearance.AppCompat"/>
+    <style name="TextAppearance" parent="TextAppearance.AppCompat" />
+
     <style name="TextAppearance.Header">
         <item name="android:textAllCaps">true</item>
         <!--<item name="android:fontFamily">sans-serif-medium</item>-->

@@ -1,6 +1,7 @@
 package com.strath.mydairyfarm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -51,16 +52,18 @@ public class DashboardFragment extends Fragment {
 
                 switch (item.getItemId()) {
                     case R.id.nav_mycows:
-                        MyCows myCows = new MyCows();
-                        FragmentTransaction cowsFrag = getActivity().getSupportFragmentManager().beginTransaction();
-                        cowsFrag.replace(R.id.fragment_holder, myCows);
-                        cowsFrag.commit();
+                        startActivity(new Intent(getContext(), CowActivity.class));
+//                        MyCows myCows = new MyCows();
+//                        FragmentTransaction cowsFrag = getActivity().getSupportFragmentManager().beginTransaction();
+//                        cowsFrag.replace(R.id.fragment_holder, myCows);
+//                        cowsFrag.commit();
                         return true;
                     case R.id.nav_register:
-                        RegisterFragment registerFragment = new RegisterFragment();
-                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_holder, registerFragment);
-                        fragmentTransaction.commit();
+                        startActivity(new Intent(getContext(), RegisterActivity.class));
+//                        RegisterFragment registerFragment = new RegisterFragment();
+//                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragment_holder, registerFragment);
+//                        fragmentTransaction.commit();
                         return true;
                     case R.id.nav_treatment:
                         return true;
@@ -74,16 +77,15 @@ public class DashboardFragment extends Fragment {
         });
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
-        ((MainActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Dashboard");
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Dashboard");
 
         drawer = view.findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
 
 
         return view;
@@ -104,7 +106,7 @@ public class DashboardFragment extends Fragment {
         if (id == R.id.action_logout) {
 
             // Dialog
-            ((MainActivity)getActivity()).runOnUiThread(new Runnable() {
+            ((MainActivity) getActivity()).runOnUiThread(new Runnable() {
                 public void run() {
 
                     new MaterialDialog.Builder(getActivity())
@@ -120,7 +122,7 @@ public class DashboardFragment extends Fragment {
 //                                    settings.setIsloggedin(false, getContext());
 //                                    settings.setUser(null, getContext());
                                     FirebaseAuth.getInstance().signOut();
-                                    ((MainActivity)getActivity()).replaceFragments(new LoginFragment(), false, "Login");
+                                    ((MainActivity) getActivity()).replaceFragments(new LoginFragment(), false, "Login");
 
                                 }
 
@@ -133,8 +135,8 @@ public class DashboardFragment extends Fragment {
                 }
             });
 
-        }else if(id == R.id.action_changepassword){
-            ((MainActivity)getActivity()).replaceFragments(new ChangePasswordFragment(), true, "Change Password");
+        } else if (id == R.id.action_changepassword) {
+            ((MainActivity) getActivity()).replaceFragments(new ChangePasswordFragment(), true, "Change Password");
         }
 
         return super.onOptionsItemSelected(item);
