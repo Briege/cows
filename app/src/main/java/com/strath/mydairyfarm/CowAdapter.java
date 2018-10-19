@@ -42,7 +42,7 @@ public class CowAdapter extends RecyclerView.Adapter<CowAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CowAdapter.ViewHolder holder, int position) {
         Cow cow = cows.get(position);
-        holder.id.setText(cow.getId());
+        holder.id.setText(cow.getCname());
         holder.type.setText(cow.getType());
     }
 

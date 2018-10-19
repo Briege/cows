@@ -8,7 +8,6 @@ public class Cow {
 
     private String id, dob, breed, cname, csex;
 
-
     public String getId() {
         return id;
     }
