@@ -23,12 +23,13 @@
         <activity
             android:name=".CowActivity"
             android:label="My Cows"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".HealthActivity" />
+        <activity android:name=".VaccinationActivity" />
+        <activity android:name=".DewormingActivity"></activity>
     </application>
 
 </manifest>

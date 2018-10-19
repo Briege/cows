@@ -4,13 +4,14 @@
     <string name="email_hint">E-Mail</string>
     <string name="password_hint">Password</string>
     <string name="login">Log In</string>
-    <string name="name">Full Name</string>
+    <string name="name">Farmer Name</string>
+    <string name="farmname">Farm Name</string>
     <string name="phonenumber">Phone Number</string>
     <string name="farmrecordstext">Daily Farm Records</string>
     <string name="signuplink">"No account yet? Create one"</string>
     <string name="loginlink">"Already have an account? Log In"</string>
     <string name="forgotpasswordlink">"Forgot Password?"</string>
-    <string name="createaccount">Create New Account</string>
+    <string name="createaccount">Register</string>
     <string name="createaccountbtn">Create Account</string>
     <string name="verifybill">VERIFY BILL</string>
     <string name="enterbillnumber">Enter Bill Number</string>

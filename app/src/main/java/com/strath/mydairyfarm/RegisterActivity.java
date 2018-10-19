@@ -27,6 +27,12 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.type)
     TextInputLayout type;
 
+    @BindView(R.id.cowname)
+    TextInputLayout cowname;
+
+    @BindView(R.id.gender)
+    TextInputLayout gender;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
     public void register() {
         String cowType = type.getEditText().getText().toString().trim();
         String dobText = dob.getEditText().getText().toString().trim();
+        String cowgender = gender.getEditText().getText().toString().trim();
+        String name = cowname.getEditText().getText().toString().trim();
 
         if (TextUtils.isEmpty(cowType) || TextUtils.isEmpty(dobText)) {
             Toast.makeText(this, "All details are required", Toast.LENGTH_SHORT).show();
@@ -67,6 +75,8 @@ public class RegisterActivity extends AppCompatActivity {
             Cow cow = new Cow();
             cow.setDob(dobText);
             cow.setType(cowType);
+            cow.setCsex(cowgender);
+            cow.setCname(name);
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 

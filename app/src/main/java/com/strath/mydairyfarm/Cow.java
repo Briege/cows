@@ -6,7 +6,8 @@ package com.strath.mydairyfarm;
 
 public class Cow {
 
-    private String id, dob, type;
+    private String id, dob, breed, cname, csex;
+
 
     public String getId() {
         return id;
@@ -25,10 +26,26 @@ public class Cow {
     }
 
     public String getType() {
-        return type;
+        return breed;
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.breed = type;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    public String getCsex() {
+        return csex;
+    }
+
+    public void setCsex(String csex) {
+        this.csex = csex;
     }
 }

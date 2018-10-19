@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +47,7 @@ public class DashboardFragment extends Fragment {
 
         navigationView = view.findViewById(R.id.nav_view);
 
+        TextView userName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.name);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -66,8 +68,10 @@ public class DashboardFragment extends Fragment {
 //                        fragmentTransaction.commit();
                         return true;
                     case R.id.nav_treatment:
+                        startActivity(new Intent(getContext(), HealthActivity.class));
                         return true;
                     case R.id.nav_records:
+                        startActivity(new Intent(getContext(), RecordsActivity.class));
                         return true;
                 }
 
