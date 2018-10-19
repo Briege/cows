@@ -38,6 +38,11 @@ public class Main2Activity extends AppCompatActivity
 
         fragmentTransaction.commit();
 
+//        SharedPref sharedPref = new SharedPref(this);
+//
+//        User user = sharedPref.getUser();
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }

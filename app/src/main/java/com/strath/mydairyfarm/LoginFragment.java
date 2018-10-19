@@ -39,7 +39,6 @@ public class LoginFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,17 +55,15 @@ public class LoginFragment extends Fragment {
 //        ((MainActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
 //        ((MainActivity)getActivity()).getSupportActionBar().setTitle("My Dairy Farm");
 
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
-                if(mEditEmail.getText().toString().isEmpty()) {
+                if (mEditEmail.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), "Email is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(mEditPassword.getText().toString().isEmpty()){
+                if (mEditPassword.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), "Password is required", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -78,17 +75,16 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        signuplink.setOnClickListener(new View.OnClickListener()
-        {
+        signuplink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).replaceFragments(new SignupFragment(), true, "Signup");
+                ((MainActivity) getActivity()).replaceFragments(new SignupFragment(), true, "Signup");
             }
         });
         return view;
     }
 
-    private void attemptLogin(String emailString, String passString) {
+    private void attemptLogin(final String emailString, String passString) {
         mAuth.signInWithEmailAndPassword(emailString, passString)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -97,7 +93,14 @@ public class LoginFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            ((MainActivity)getActivity()).replaceFragments(new DashboardFragment(), false, "");
+
+                            SharedPref sharedPref = new SharedPref(getContext());
+                            User u = new User();
+                            u.setEmail(user.getEmail());
+                            u.setName(user.getDisplayName());
+                            sharedPref.setUser(u);
+
+                            ((MainActivity) getActivity()).replaceFragments(new DashboardFragment(), false, "");
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
