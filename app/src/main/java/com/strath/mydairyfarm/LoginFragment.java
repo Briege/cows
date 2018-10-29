@@ -1,5 +1,6 @@
 package com.strath.mydairyfarm;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -85,6 +86,11 @@ public class LoginFragment extends Fragment {
     }
 
     private void attemptLogin(final String emailString, String passString) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Logging in...");
+        progressDialog.show();
+
         mAuth.signInWithEmailAndPassword(emailString, passString)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
@@ -94,6 +100,7 @@ public class LoginFragment extends Fragment {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
+                            progressDialog.dismiss();
                             SharedPref sharedPref = new SharedPref(getContext());
                             User u = new User();
                             u.setEmail(user.getEmail());
@@ -104,6 +111,8 @@ public class LoginFragment extends Fragment {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Log.e("Unsuccessful", "=" );
+                            progressDialog.dismiss();
                             Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
 
                         }

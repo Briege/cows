@@ -18,34 +18,34 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+public class VaccinationAdapter extends RecyclerView.Adapter<VaccinationAdapter.ViewHolder> {
 
-public class CowAdapter extends RecyclerView.Adapter<CowAdapter.ViewHolder> {
-
-    private ArrayList<Cow> cows;
+    private ArrayList<Vaccination> vaccinations;
     private Context context;
 
-    public CowAdapter(Context context, ArrayList<Cow> cows) {
+    public VaccinationAdapter(Context context, ArrayList<Vaccination> vaccinations) {
         this.context = context;
-        this.cows = cows;
+        this.vaccinations = vaccinations;
     }
 
     @NonNull
     @Override
-    public CowAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public VaccinationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.cow_item, parent, false);
-        return new ViewHolder(view);
+        return new VaccinationAdapter.ViewHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull CowAdapter.ViewHolder holder, int position) {
-        Cow cow = cows.get(position);
-        holder.id.setText(cow.getCname());
-        holder.type.setText(cow.getType());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Vaccination vaccination = vaccinations.get(position);
+        holder.id.setText(vaccination.getType());
+        holder.type.setText(vaccination.getVaccinationdate());
     }
 
     @Override
     public int getItemCount() {
-        return cows.size();
+        return vaccinations.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,12 +63,13 @@ public class CowAdapter extends RecyclerView.Adapter<CowAdapter.ViewHolder> {
 
         @OnClick(R.id.close)
         public void close() {
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.child("cows").child(cows.get(getAdapterPosition()).getId()).removeValue();
+//            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//            databaseReference.child("vaccinations").child(vaccinations.get(getAdapterPosition()).getType()).removeValue();
+
+
         }
 
 
+
     }
-
-
 }
