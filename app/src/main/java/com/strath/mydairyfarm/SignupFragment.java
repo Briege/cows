@@ -1,6 +1,8 @@
 package com.strath.mydairyfarm;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,7 +36,7 @@ public class SignupFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private Button buttoncreateaccount;
-    private TextInputEditText mEditEmail, mEditPassword, mEditName, mEditPhonenumber, mEditConfirmpass;
+    private TextInputEditText mEditEmail, mEditPassword, mEditName, mEditPhonenumber, mEditConfirmpass, mfarm;
     private TextView loginlink;
 //    private DatabaseReference databaseReference;
 
@@ -56,6 +58,7 @@ public class SignupFragment extends Fragment {
         mEditName = view.findViewById(R.id.name);
         mEditPhonenumber = view.findViewById(R.id.phonenumber);
         mEditConfirmpass = view.findViewById(R.id.confirmpassword);
+        mfarm = view.findViewById(R.id.farmname);
         loginlink = view.findViewById(R.id.link_login);
 
 //        Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -93,6 +96,10 @@ public class SignupFragment extends Fragment {
                 }
                 if(!mEditPassword.getText().toString().equals(mEditConfirmpass.getText().toString())){
                     Toast.makeText(getActivity(), "The two passwords should be the same!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(mfarm.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Farm name is required!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -133,19 +140,52 @@ public class SignupFragment extends Fragment {
     public void createAccount(String emailString, String passString)
     {
 
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Logging in...");
+        progressDialog.show();
+
+        String emailStr = mEditEmail.getText().toString();
+        String nameStr = mEditName.getText().toString();
+        String phoneStr = mEditPhonenumber.getText().toString();
+        String farmNameStr = mfarm.getText().toString();
+
+        final User user = new User(nameStr, emailStr, phoneStr, farmNameStr);
+
         mAuth.createUserWithEmailAndPassword(emailString, passString)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful() ) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            ((MainActivity)getActivity()).replaceFragments(new DashboardFragment(), true, "Signup");
+
+                            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                            String userID = mAuth.getCurrentUser().getUid();
+                            FirebaseDatabase.getInstance().getReference("Users").child(userID)
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+
+                                    progressDialog.dismiss();
+                                    SharedPref sharedPref = new SharedPref(getContext());
+                                    User u = new User();
+                                    u.setEmail(user.getEmail());
+                                    u.setName(user.getName());
+                                    sharedPref.setUser(u);
+//                                    FirebaseUser user = mAuth.getCurrentUser();
+//                                    ((MainActivity)getActivity()).replaceFragments(new DashboardFragment(), true, "Signup");
+                                    Intent intent = new Intent(getContext(), Main2Activity.class);
+                                    startActivity(intent);
+                                }
+                            });
+
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Log.e(TAG, "onComplete: ", task.getException());
+                            progressDialog.dismiss();
                             Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
 
                         }

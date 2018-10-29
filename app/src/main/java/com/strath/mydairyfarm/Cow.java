@@ -1,12 +1,9 @@
 package com.strath.mydairyfarm;
 
-/**
- * Created by oirere on 09/07/2018.
- */
 
 public class Cow {
 
-    private String id, dob, breed, cname, csex;
+    private String id, dob, breed, cname, csex, farm;
 
     public String getId() {
         return id;
@@ -46,5 +43,21 @@ public class Cow {
 
     public void setCsex(String csex) {
         this.csex = csex;
+    }
+
+//    public String getBreed() {
+//        return breed;
+//    }
+//
+//    public void setBreed(String breed) {
+//        this.breed = breed;
+//    }
+
+    public String getFarm() {
+        return farm;
+    }
+
+    public void setFarm(String farm) {
+        this.farm = farm;
     }
 }

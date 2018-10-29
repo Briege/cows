@@ -51,10 +51,8 @@ public class HealthActivity extends AppCompatActivity {
         cardTreatment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent illness = new Intent(HealthActivity.this, TreatmentActivity.class);
-                startActivity(illness);
 
-//                startActivity(new Intent(HealthActivity.this, TreatmentActivity.class));
+                startActivity(new Intent(HealthActivity.this, TreatmentActivity.class));
             }
         });
     }

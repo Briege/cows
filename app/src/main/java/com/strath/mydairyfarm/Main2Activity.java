@@ -14,18 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView textView, emailtextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -33,18 +36,20 @@ public class Main2Activity extends AppCompatActivity
 
         DashboardFragment dashboardFragment = new DashboardFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.add(dashboardFragment, DashboardFragment.class.getSimpleName());
         fragmentTransaction.add(R.id.container, dashboardFragment);
-
         fragmentTransaction.commit();
 
-//        SharedPref sharedPref = new SharedPref(this);
-//
-//        User user = sharedPref.getUser();
+        SharedPref sharedPref = new SharedPref(this);
+        User user = sharedPref.getUser();
 
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View hView =  navigationView.getHeaderView(0);
+        TextView nav_profile = hView.findViewById(R.id.profile);
+        emailtextView = hView.findViewById(R.id.emailprofile);
+        nav_profile.setText(sharedPref.getUser().getName());
+        emailtextView.setText(sharedPref.getUser().getEmail());
     }
 
     @Override
@@ -88,27 +93,22 @@ public class Main2Activity extends AppCompatActivity
         switch (id) {
             case R.id.nav_mycows:
                 startActivity(new Intent(this, CowActivity.class));
-//                        MyCows myCows = new MyCows();
-//                        FragmentTransaction cowsFrag = getActivity().getSupportFragmentManager().beginTransaction();
-//                        cowsFrag.replace(R.id.fragment_holder, myCows);
-//                        cowsFrag.commit();
                 return true;
+
             case R.id.nav_register:
                 startActivity(new Intent(this, RegisterActivity.class));
-//                        RegisterFragment registerFragment = new RegisterFragment();
-//                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                        fragmentTransaction.replace(R.id.fragment_holder, registerFragment);
-//                        fragmentTransaction.commit();
                 return true;
+
             case R.id.nav_treatment:
                 startActivity(new Intent(this, HealthActivity.class));
                 return true;
+
             case R.id.nav_records:
                 startActivity(new Intent(this, RecordsActivity.class));
                 return true;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

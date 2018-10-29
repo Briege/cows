@@ -14,14 +14,14 @@
         android:drawableStart="@drawable/ic_keyboard_return_black_18dp"
         android:drawableLeft="@drawable/ic_keyboard_return_black_18dp"
         android:padding="16dp"
-        android:text="My Cows"
+        android:text="Vaccinations Done"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/cows"
+        android:id="@+id/vaccinations"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
