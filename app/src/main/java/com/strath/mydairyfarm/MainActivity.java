@@ -1,5 +1,6 @@
 package com.strath.mydairyfarm;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        DashboardFragment dashboardFragment = new DashboardFragment();
+//        LoginFragment loginFragment = new LoginFragment();
 //        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 ////        fragmentTransaction.add(dashboardFragment, DashboardFragment.class.getSimpleName());
-//        fragmentTransaction.add(R.id.fragment_holder, dashboardFragment);
-//
+//        fragmentTransaction.add(R.id.fragment_holder, loginFragment);
+
 //        fragmentTransaction.commit();
 
         mAuth = FirebaseAuth.getInstance();
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
             //Go to log in page
-            replaceFragments(new LoginFragment(), false, "Login");
+            startActivity(new Intent(this, LoginActivity.class));
         } else {
             replaceFragments(new DashboardFragment(), false, "");
         }

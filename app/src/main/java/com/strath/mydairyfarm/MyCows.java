@@ -31,8 +31,6 @@ public class MyCows extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_my_cows, container, false);
 
-
-
         return view;
 
     }

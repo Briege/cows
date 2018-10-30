@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +32,9 @@ public class CowActivity extends AppCompatActivity {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        databaseReference.child("cows").addValueEventListener(new ValueEventListener() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        databaseReference.child("Users").child(user.getUid()).child("Cows").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Cow> cows = new ArrayList<>();

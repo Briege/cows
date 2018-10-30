@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -33,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.gender)
     TextInputLayout gender;
 
-    @BindView(R.id.farmname)
+    @BindView(R.id.text_farmname)
     TextInputLayout farmname;
 
     @Override
@@ -85,11 +87,13 @@ public class RegisterActivity extends AppCompatActivity {
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-            String key = databaseReference.child("cows").push().getKey();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            String key = databaseReference .child("cows").push().getKey();
 
             cow.setId(key);
 
-            databaseReference.child("cows").child(key).setValue(cow);
+            FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).child("Cows").child(key).setValue(cow);
 
             Toast.makeText(this, "Cow added successfully", Toast.LENGTH_SHORT).show();
 

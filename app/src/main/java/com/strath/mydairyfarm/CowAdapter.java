@@ -67,7 +67,13 @@ public class CowAdapter extends RecyclerView.Adapter<CowAdapter.ViewHolder> {
             databaseReference.child("cows").child(cows.get(getAdapterPosition()).getId()).removeValue();
         }
 
-
+        @OnClick(R.id.view)
+        public void cowDetails() {
+            Intent intent = new Intent(context, CowDetailActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("cow", cows.get(getAdapterPosition()).getId());
+            context.startActivity(intent);
+        }
     }
 
 

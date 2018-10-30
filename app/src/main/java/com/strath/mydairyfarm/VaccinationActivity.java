@@ -8,8 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,23 +27,29 @@ import butterknife.OnClick;
 
 public class VaccinationActivity extends AppCompatActivity {
 
-    @BindView(R.id.vaccinations)
-    RecyclerView vaccinationsList;
-
     TextInputLayout dvaccination, cowname, type, description;
     Button save;
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccination);
-        ButterKnife.bind(this);
 
         dvaccination = findViewById(R.id.dvaccination);
         cowname = findViewById(R.id.cowname);
         type = findViewById(R.id.type);
         description = findViewById(R.id.description);
+
         save = findViewById(R.id.save);
+        title = findViewById(R.id.title);
+
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +57,6 @@ public class VaccinationActivity extends AppCompatActivity {
                 save();
             }
         });
-
 
 //        databaseReference.child("vaccinations").addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -89,17 +97,17 @@ public class VaccinationActivity extends AppCompatActivity {
             vaccination.setType(vaccinetype);
             vaccination.setDescription(vdescription);
 
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-            String key = databaseReference.child("vaccinations").push().getKey();
+            String key = databaseReference.child("Users").child(user.getUid()).child("Vaccinations").push().getKey();
 
             vaccination.setId(key);
 
-            databaseReference.child("vaccinations").child(key).setValue(vaccination);
+            FirebaseDatabase.getInstance().getReference("Users").child(user.getUid()).child("Vaccinations").child(key).setValue(vaccination);
 
             Toast.makeText(this, "Vaccination added successfully", Toast.LENGTH_SHORT).show();
-
-//            startActivity(new Intent(RegisterActivity.this, CowActivity.class));
 
             finish();
         }
